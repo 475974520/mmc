@@ -1,0 +1,21 @@
+<div class="row" id="statisticsView" >
+	<div class="col-md-2" id="checkboxResult">
+		<div class="btn-block"> 
+			<button type="button" class="btn btn-outline-secondary" onclick="chooseAll()">全部</button>
+			<button type="button" class="btn btn-outline-secondary" onclick="clearAll()">清空</button>
+		</div>
+		<!--多选-->
+		<div class="btn-group-vertical btn-block" role="group" data-toggle="buttons" id="checkboxView">
+			<label class="btn btn-warning" onchange="updateBrand()">
+				<input type="checkbox" autocomplete="off">宝马
+			</label>
+			<label class="btn btn-warning" onchange="updateBrand()">
+				<input type="checkbox" autocomplete="off">奥迪
+			</label>
+		</div>
+	</div>
+	<div class="col-md-10" id="contentResult">
+		<h1>这里是图表</h1>
+	</div>
+</div>
+

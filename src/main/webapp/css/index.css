@@ -1,0 +1,34 @@
+#areali:hover, #brandli:hover, #hedgeli:hover, #mileageli:hover, #ageli:hover {
+	-webkit-transform: scale(1.2,1.2);
+}
+
+/* #area,  */
+#area, #brand, #hedge, #mileage, #age {
+	width: 1400px;
+	height: 900px;
+}
+#modalDiv {
+	height: 900px;
+	width: 930px;
+}
+#modalContent {
+	height: 800px;
+	width: 900px;
+}
+
+.small {
+	position: relative;
+	right: 300px;
+	bottom: 260px;
+	-webkit-transform: scale(0.4,0.4);
+}
+
+.tableStyle {
+	position: absolute;
+	top:330px;
+	left:25px;
+	height: 480px;
+	width: 850px;
+	overflow-y: scroll;
+}
+

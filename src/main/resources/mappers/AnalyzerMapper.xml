@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mmc.mapper.AnalyzerMapper">
+
+	<select id="getAllForBrand" resultType="Car">
+		select distinct brand from car;
+	</select>
+	<select id="getNumByBrand" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(id) from car where brand= #{brand};
+	</select>
+	
+	<!-- <select id="getAllForCity" resultType="Car">
+		select distinct city from car;
+	</select>
+	<select id="getNumByCity" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(id) from car where city= #{city};
+	</select> -->
+	
+	<select id="getCountByProvince" resultType="com.mmc.vo.ProvinceCount">
+		SELECT province, COUNT(province) count FROM car WHERE province IN (
+	 	SELECT province FROM car GROUP BY province 
+     ) GROUP BY province;
+		
+	</select>
+	
+	
+	<!-- <select id="getAllPremiumByModel" resultType="Car">
+		select distinct model from car;
+	</select> -->
+	<!-- 获取所有的车系，用于二维数组定义大小 -->
+	<select id="getAllModel" resultType="Car">
+		select * from car;
+	</select>
+	<!-- 根据品牌获取对应的所有车系 -->
+	<select id="getAllModelByBrand" resultType="Car">
+		select distinct model from car where brand = #{brand}
+	</select>
+	<select id="getListByBr_Mo" parameterType="java.lang.String" resultType="Car">
+		select * from car where brand = #{brand} and model = #{model}
+	</select>
+	<!-- <select id="getPremiumRateByModel" parameterType="java.lang.String" resultType="Car">
+		select * from car where model = #{model}
+	</select> -->
+	
+	<!-- 汽车里程数 -->
+	<select id="getAllMileage" resultType="java.lang.Long">
+		select distinct mileage from car;
+	</select>
+	<!-- <select id="getCarNumByMil" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(id) from car where mileage between (#{mileage}-1)*10000 and #{mileage}*10000
+	</select> -->
+	<select id="getAllMile" resultType="com.mmc.vo.MileCount">
+		SELECT mileage,COUNT(id) COUNT FROM car  GROUP BY mileage
+	</select>
+	
+	
+	<!-- 根据里程数查询对应的品牌 -->
+	<!-- <select id="getBrandNumByMileage" parameterType="java.lang.Integer" resultType="java.lang.String">
+		SELECT DISTINCT brand FROM car WHERE mileage BETWEEN (#{mileage}-1)*10000 AND #{mileage}*10000
+	</select> -->
+	<select id="getBrandNum9" parameterType="java.lang.Integer" resultType="com.mmc.vo.BrandCount">
+		SELECT brand,COUNT(brand) count FROM car WHERE mileage 
+		BETWEEN (#{mileage}-1)*10000 AND #{mileage}*10000 GROUP BY brand ORDER BY COUNT(brand) DESC LIMIT 20
+	</select>
+	<select id="getBrandNumAll" parameterType="java.lang.Integer" resultType="com.mmc.vo.BrandCount">
+		SELECT brand,COUNT(brand) count FROM car WHERE mileage 
+		BETWEEN (#{mileage}-1)*10000 AND #{mileage}*10000 GROUP BY brand ORDER BY COUNT(brand) DESC
+	</select>
+	<!-- <select id="getAllYear" resultType="java.lang.Integer">
+		select distinct year from car; 
+	</select>
+	<select id="getRunByYear" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(id) from car where year= #{year}
+	</select> -->
+	<!-- 年份数量统计 -->
+	<select id="getCountByYear_Br"  resultType="java.lang.Integer">
+		select count(id) from car where year = #{year} and brand = #{brand}
+	</select>
+	
+	<!-- 根据地区名获取品牌总数 -->
+	<!-- <select id="getBrandByProvince" parameterType="java.lang.String" resultType="com.mmc.vo.BrandCount">
+		SELECT brand, COUNT(brand) COUNT FROM car WHERE brand IN (
+	 	SELECT brand FROM (SELECT * FROM car WHERE province = #{province}) a GROUP BY brand 
+     ) GROUP BY brand  order by count(brand) desc;
+	</select> -->
+	<select id="getBrandNumByArea" resultType="com.mmc.vo.BrandCount" parameterType="String">
+		 SELECT brand,COUNT(brand) COUNT FROM car WHERE 
+		 province = #{provinceName} GROUP BY brand ORDER BY COUNT(brand) DESC LIMIT 9
+	</select>
+	<select id="getBrandNumAllArea" resultType="com.mmc.vo.BrandCount" parameterType="String">
+		SELECT brand,COUNT(brand) COUNT FROM car WHERE 
+		province = #{provinceName} GROUP BY brand ORDER BY COUNT(brand) DESC
+	</select>
+	
+	<select id="getCarList" resultType="Car">
+		select * from car where province = #{cityName} and brand = #{brandName}
+	</select>
+	
+	<select id="getAllBrandAndCountAndPrice" resultType="com.mmc.vo.BrandCount">
+		 SELECT brand, price, COUNT(price) count FROM car GROUP BY price,brand ORDER BY brand;
+	</select>
+	
+	<select id="get20Brand" resultType="java.lang.String">
+		SELECT brand FROM car GROUP BY brand ORDER BY COUNT(brand) DESC LIMIT 20
+	</select>
+	
+	<select id="getBr_Ye_Nu" resultType="com.mmc.vo.BrandCount">
+		SELECT brand,YEAR,COUNT(brand) COUNT  FROM car GROUP BY brand,YEAR
+	</select>
+	
+	<select id="getAreaOrederByBrand" parameterType="String" resultType="com.mmc.vo.CityCount">
+		 SELECT city,COUNT(city) COUNT FROM car WHERE brand=#{brandName}
+		 GROUP BY city ORDER BY COUNT(city) DESC LIMIT 15
+	</select>
+	
+	<select id="getpremiumrate" resultType="com.mmc.vo.Premiumrate">
+		SELECT brand,price,original_price,YEAR,mileage FROM car                                                                                                                                
+	</select>
+	<select id="getBrand" resultType="java.lang.String">
+		SELECT brand FROM car group by brand                                                                                                                               
+	</select>
+
+	
+</mapper>

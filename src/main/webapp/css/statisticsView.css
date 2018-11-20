@@ -1,0 +1,22 @@
+#checkboxResult {
+	height: 750px;
+	background-color: while;
+	text-align: center;
+	overflow: auto;
+	margin-top: 10px;
+}
+
+#contentResult {
+	height: 750px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+#checkboxResult button {
+	width: 60px;
+	margin: 10px;
+}
+
+#checkboxResult label{
+	margin-bottom: 10px;
+}

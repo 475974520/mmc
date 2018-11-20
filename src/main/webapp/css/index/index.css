@@ -1,0 +1,48 @@
+body {
+	background-image: url('../../picture/1.jpg');
+	background-repeat: repeat;
+	background-position: center;
+}
+
+#main{
+	height: 650px;
+}
+
+#main {
+	text-align: center;
+}
+
+#navigation {
+	margin-top: 25%;
+}
+
+#navigation a {
+	font-size: 2em;
+	color: grey;
+}
+
+#search, #statistics,#valuation {
+	margin-top: 80px;
+}
+
+#search button {
+	margin-left: 30px;
+	width: 150px;
+}
+
+#valuation .btn-group {
+	margin-left: 40px;
+	margin-right: 30px;
+	margin-bottom: 30px;
+}
+
+#valuation .btn-group button {
+	width: 100px;
+}
+
+#calculation {
+	text-align: center;
+	margin-top: 30px;
+}
+
+
